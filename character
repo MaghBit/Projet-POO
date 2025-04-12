@@ -1,0 +1,56 @@
+from random import randint
+import LancerDe
+from flask import Flask, render_template, request, session, redirect, url_for
+import requests
+app == Flask(__name__)
+app.secret_key= "#l'emplacement du fichier"
+
+class Personnage:
+    def __init__(self, nom):
+        self.vie=150
+        self.nom=nom
+        self.x=1 #horizontal (sol)  
+        self.y=1 #vertical (saut)
+
+
+    def donneEtat(self):
+        return self.vie
+    
+    #assert que la position de l'ennemi soit de bonne position d'attaque (1,1) or (0,0) or (1,0) or (0,1)
+    def attaque(self):
+        if 15<LancerDe():
+            self.vie=self.vie-20
+            return "critique"
+        elif 10<LancerDe()<15:
+            self.vie=self.vie-15
+            return "normal"
+        elif 5<LancerDe()<10:
+            self.vie=self.vie-10
+            return "presque"
+        else:
+            self.vie=self.vie-0
+            return "miss"
+        
+    def esquive_gauche(self):
+        if self.x==(-10):
+            return "a tapé un mur"
+        else:
+           return self.x-1
+    
+    def esquive_droit(self):
+        if self.x==10:
+            return "personnage a tapé un mur"
+        else:
+            return self.x+1
+    
+    def saut(self):
+        if self.y==10:
+            return "Personnage a atteint le toit"
+        else:
+            return self.y+1
+    
+    def descendre(self):
+        if self.y==1:
+            return "Personnage déjà au sol!"
+        else:
+            return self.y-1
