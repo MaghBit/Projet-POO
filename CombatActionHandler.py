@@ -1,3 +1,4 @@
+#Ce fichier gère les actions du joueur lors du combat. Il permet d'attaquer, fuir et ouvrir le sac/utiliser un objet. Il gère également tous ce qui est lié à inventaire du personnage.
 from BackPackHolder import *
 
 from Item import *
@@ -9,7 +10,7 @@ from MobHolder import *
 
 from UiHandler import *
 from LancerDe import *
-
+##### Action : attaquer
 def fight(action,player: Personnage,enemy: Personnage,backPack: BackPackHolder, de = None):
     if(action == "Attaquer"):
         #Lancer le dé pour s'avoir si le joueur touche
@@ -23,19 +24,23 @@ def fight(action,player: Personnage,enemy: Personnage,backPack: BackPackHolder, 
             elif de=="normal":
                 print("Vous mettez un coup avec succés !")
             elif de=="presque":
-                print("Vous trébuchiez sur vos pas")
+                print("Vous trébuchez sur vos pas")
                 boost = 0.8
             player.attack(enemy, boost)
             
+    ##### Action : fuir
     elif action == "Fuir":
         if de=="critique":
             enemy.getDamage(999)
-            print(" Vous fuyez avec succès comme un trouhiard \n Personne ne le saura !")
+            print(" Vous fuyez avec succès comme un trouillard \n Personne ne le saura !")
         else:
+
             print("Vous ne pouvez pas fuir !")
 
+
+    ##### Action : Ouvrir le sac
     elif(action == "Ouvrir le sac"):
-        #Ourvre le sac
+        
         clearScreen()
 
         print("Vous ouvrez  le sac")
@@ -50,11 +55,12 @@ def fight(action,player: Personnage,enemy: Personnage,backPack: BackPackHolder, 
 
             de = printdiceRollAnimation()
 
-            
+            #La potion n'a pas d'effet
             if de=="rate":
                 print("Mais cela a échoué !")
             
             else:
+                #si l'effet de la potion est bénéfique
                 boost = 1
                 if choosedItem.getIsBenefic():
                     print("Vous gagnez {} points de vies !".format(dmg))
@@ -69,6 +75,7 @@ def fight(action,player: Personnage,enemy: Personnage,backPack: BackPackHolder, 
                     player.pv += round(dmg*boost)
                     
                 else:
+                    #si l'effet de la potion est néfaste
                     print("Vous lancez la potion sur {}.".format(enemy.getName().lower()))
 
                     if de == "critique":
@@ -117,7 +124,7 @@ def fight(action,player: Personnage,enemy: Personnage,backPack: BackPackHolder, 
     return True
     
 
-
+#Cette fonction initialise la bataille en créant un nouvel ennemi et en ajoutant deux objets aléatoires au sac du joueur.
 def initBattle(player,enemy,backPack):
     #Creer le nouvel ennemis
     newEnemy = MobHolder().pickRandomMob()  
@@ -130,6 +137,7 @@ def initBattle(player,enemy,backPack):
     #Lancer l'animation du round
     nextRoundAnimation(1,player,backPack,enemy,newEnemy)
 
+#Cette fonction gère la fin du round et le passage au round suivant. Elle permet de créer un nouvel ennemi et d'ajouter un objet aléatoire au sac du joueur.
 def nextRound(currentRoundId,player,backPack,enemy):
     obtainedItem = None
     if random.random()*100 > 50:
