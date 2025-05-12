@@ -1,3 +1,4 @@
+#Ce fichier a pour but de d'avoir la classe de base pour tous les héros/joueurs
 from Personnage import *
 
 class Player(Personnage):
