@@ -35,7 +35,7 @@ class BackPackHolder:
         
         choosedItem = self.items[choosed]
         
-
+        #Si l'objet est une amulette, on l'utilise et on vérifie si elle a été utilisée au maximum
         if(choosedItem.__class__.__name__ == "Amulet"):
             choosedItem.ItemUsed()
             if choosedItem.isUsedMax():
