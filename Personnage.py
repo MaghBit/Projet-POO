@@ -1,3 +1,4 @@
+#Ce fichier a pour but de d'avoir la classe de base pour tout les personnages
 class Personnage:
     def __init__(self,name,pv,attackdmg):
         self.name=name;
@@ -13,8 +14,7 @@ class Personnage:
         dmg = round(self.getattackdmg()*boost)
         print("{} attaque {} ({} points de degat(s))".format(self.getName(),victim.getName(),dmg))
         victim.getDamage(dmg)
-        
-        
+              
     def modifyStat(self,name,value):
         if(name == "PV"):
             self.pv += value
@@ -23,9 +23,8 @@ class Personnage:
             self.pv += value
                 
     def getName(self):
-        return self.name
-
-           
+        return self.name 
+    
     def getPv(self):
         return self.pv
         
