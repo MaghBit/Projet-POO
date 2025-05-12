@@ -1,3 +1,4 @@
+#Ce fichier a pour but de d'avoir la classe de base pour tout les potions
 from Item import *
 
 class Potion(Item):
