@@ -1,7 +1,9 @@
+#fichier qui s'occupe de l'affichage de l'interface
 import time
 import sys
 from LancerDe import LanceDe
 
+#Cette méthode permet de sauter des lignes pour nettoyer l'écran
 def clearScreen():
     print("\n"*100)
 
@@ -13,6 +15,7 @@ def createSymbolMultiple(length,symbol):
         i += 1
     return string   
 
+#Cette méthode permet de créer une bannière pour afficher les stats du joueur et de l'ennemi
 def createBattleStatSquare(fighter,size):
     
     #La banière avec le nom    
@@ -53,6 +56,7 @@ def createBattleStatSquare(fighter,size):
 
     return drawed
 
+#Cette méthode permet d'afficher les stats du joueur et de l'ennemi
 def printBattleArena(player,enemy):
     clearScreen()
     
@@ -61,7 +65,7 @@ def printBattleArena(player,enemy):
     print(createBattleStatSquare(enemy,14))
 
 
-
+#Cette méthode permet d'afficher, à la fin de chaque round, une animation de transition
 def nextRoundAnimation(roundId,player,enemy,newEnemy,obtainedItem=None):
     
      #Round Suivant
@@ -83,7 +87,7 @@ def nextRoundAnimation(roundId,player,enemy,newEnemy,obtainedItem=None):
     sys.stdout.flush()
     time.sleep(3)
 
-
+#Cette méthode est la méthode principale qui gère le choix de l'action du joueur. Elle affiche les actions possibles et demande à l'utilisateur de choisir une action.
 def chooseBattleActions(possibleAction):
    
     print("Actions possibles : ")
@@ -105,16 +109,18 @@ def chooseBattleActions(possibleAction):
     
     return possibleAction[choosed]   
 
+#Cette méthode permet d'afficher un message pour demander à l'utilisateur d'appuyer sur Entrée pour continuer
 def waitToResume():
     print("Appuyer sur Entrée pour continuer...")
     input()
 
-
+#Cette méthode permet d'afficher un texte lettre par lettre avec un délai entre chaque lettre
 def printTextAnimation(textToPrint,delay = 0.05):
     for letter in textToPrint:
         print(letter, end="")
         time.sleep(delay)
 
+#Cette méthode permet de lancer un dé à 20 faces et d'afficher le résultat
 def printdiceRollAnimation():
         """
         Lance un dé à 20 faces et renvoie le résultat"""
@@ -129,7 +135,7 @@ def printdiceRollAnimation():
         print("└----------┘")
         return resultat
 
-
+#Cette méthode permet d'afficher le message de début de jeu
 def introSequence():
     clearScreen()
     printTextAnimation("""⠀                      ⢀⡴⠞⠛⠉⢙⡛⣶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -174,5 +180,6 @@ def introSequence():
     sys.stdout.flush()
     time.sleep(1)
 
+#Cette méthode permet d'afficher le message de fin de jeu
 def gameOverAnimation(enemy,currentRoundId):
     print(enemy.getName(), "vous blesse et termine la bataille en vous donnant le cancer....\nVous êtes mort après ",currentRoundId," bataille(s)...")
